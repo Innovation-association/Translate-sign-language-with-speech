@@ -1,0 +1,17 @@
+Model: ResNet18
+_Attributes:
+  fixed_input_shape: null
+  labels:
+  - B
+  - down
+  - left
+  - pause
+  - right
+  - up
+  model_type: classifier
+  num_classes: 6
+_init_params:
+  num_classes: 6
+completed_epochs: 1
+status: Normal
+version: 1.3.7

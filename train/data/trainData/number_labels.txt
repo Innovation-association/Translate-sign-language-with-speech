@@ -1,0 +1,6 @@
+B
+down
+left
+pause
+right
+up
