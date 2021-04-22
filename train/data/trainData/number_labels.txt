@@ -1,6 +1,10 @@
-B
-down
-left
-pause
-right
-up
+Angle
+Far
+Go
+Into
+Is
+No
+Sit
+Standing
+Stop
+Under

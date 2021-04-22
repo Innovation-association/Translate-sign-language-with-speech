@@ -14,7 +14,8 @@ import imutils
 bg = None
 
 # 数据存储路径
-save_path = '../../../train/data/trainData/test001'
+# data\trainData\gestures\Angle
+save_path = '../../../train/data/trainData/gestures/Angle'
 
 
 def run_avg(image, aWeight):

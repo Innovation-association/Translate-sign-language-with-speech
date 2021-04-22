@@ -3,8 +3,8 @@ import paddlex
 import cv2
 
 
-model_dir = './model/number/epoch_1'
-test_jpg_path = './data/testData/number/saved_0001.jpg'  # 测试图片路径
+model_dir = './model/gestures/epoch_1'
+test_jpg_path = '0002.jpg'  # 测试图片路径
 
 
 train_transforms = transforms.Compose([

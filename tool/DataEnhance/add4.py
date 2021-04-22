@@ -12,7 +12,9 @@ import numpy as np
 import cv2
 
 
-save_path = "../../train/data/trainData/test002/"
+# save_path = "../../train/data/trainData/test002/"
+
+save_path = '..\\..\\train\data\\trainData\\gestures\\Under\\'
 
 
 def SaltAndPepper(src, percetage):
@@ -136,5 +138,7 @@ def traverse(f):
             img_augmentation(tmp_path, i)
         i = i+8
 
-path = '..\\..\\train\data\\trainData\\test001\\'
-traverse(path)
+# path = '..\\..\\train\data\\trainData\\gestures\\Angle\\'
+
+
+traverse(save_path)

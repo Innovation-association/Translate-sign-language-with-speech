@@ -13,7 +13,7 @@ import cv2
 bg = None
 
 # 数据存储路径
-save_path = 'E:\\科创\github项目\\00001手语翻译\\Translate-sign-language-with-speech\\train\data\\trainData\\test001'
+save_path = '../../train/data/trainData/gestures/Under'
 
 # 截取矩形框的坐标
 top, right, bottom, left = 90, 380, 285, 590
