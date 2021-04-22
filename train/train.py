@@ -10,7 +10,7 @@ base = './data/trainData/number'
 train_list_path = './data/trainData/train_list.txt'      # 训练列表
 labels_path = './data/trainData/number_labels.txt'       # 训练数据标签
 test_jpg_path = './data/testData/number/saved_0001.jpg'  # 测试图片路径
-model_save_dir = './model/number'                       # 模型存放路径
+model_save_dir = './model/number'                        # 模型存放路径
 
 with open(os.path.join(train_list_path), 'w') as f:
     for i, cls_fold in enumerate(os.listdir(base)):

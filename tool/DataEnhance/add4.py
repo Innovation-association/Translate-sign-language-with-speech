@@ -1,12 +1,13 @@
 #!/usr/bin/python3.6
 # -*- coding: utf-8 -*-
-# @Time       : 2021/4/22 10:12
+# @Time       : 2021/4/22 13:39
 # @Author     : 代登辉
 # @Email      : 3276336032@qq.com
-# @File       : add2.py
+# @File       : add4.py
 # @Software   : PyCharm
-# @Description: 单张照片数据增强
+# @Description: 数据增强
 
+import os
 import numpy as np
 import cv2
 
@@ -77,9 +78,27 @@ def rotate(image, angle=15, scale=0.9):
     return image
 
 
+def gasuss_noise(image, mean=0, var=0.001):
+    '''
+        添加高斯噪声
+        mean : 均值
+        var : 方差
+    '''
+    image = np.array(image / 255, dtype=float)
+    noise = np.random.normal(mean, var ** 0.5, image.shape)
+    out = image + noise
+    if out.min() < 0:
+        low_clip = -1.
+    else:
+        low_clip = 0.
+    out = np.clip(out, low_clip, 1.0)
+    out = np.uint8(out * 255)
+    return out
+
+
 def img_augmentation(path, name_int):
     img = cv2.imread(path)
-    cv2.imshow("a",img)
+
     img_flip = cv2.flip(img, 1)  # flip
     img_rotation = rotate(img)  # rotation
 
@@ -89,13 +108,33 @@ def img_augmentation(path, name_int):
     img_brighter = brighter(img)
     img_darker = darker(img)
 
-    cv2.imwrite(save_path + '%s' % str(name_int) + '.jpg', img_flip)
-    cv2.imwrite(save_path + '%s' % str(name_int + 1) + '.jpg', img_rotation)
-    cv2.imwrite(save_path + '%s' % str(name_int + 2) + '.jpg', img_noise1)
-    cv2.imwrite(save_path + '%s' % str(name_int + 3) + '.jpg', img_noise2)
-    cv2.imwrite(save_path + '%s' % str(name_int + 4) + '.jpg', img_brighter)
-    cv2.imwrite(save_path + '%s' % str(name_int + 5) + '.jpg', img_darker)
+
+    rows, cols = img.shape[:2]
+    M = cv2.getRotationMatrix2D((cols / 2, rows / 2), 30, 1)
+    dst_30 = cv2.warpAffine(img, M, (cols, rows))
+
+    img_gasuss = gasuss_noise(img)
+
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int) + '.jpg', img_flip)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 1) + '.jpg', img_rotation)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 2) + '.jpg', img_noise1)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 3) + '.jpg', img_noise2)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 4) + '.jpg', img_brighter)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 5) + '.jpg', img_darker)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 6) + '.jpg', dst_30)
+    cv2.imwrite(save_path + "add" + '%s' % str(name_int + 7) + '.jpg', img_gasuss)
+    print("end")
 
 
-path = ""
-img_augmentation(path, 1)
+def traverse(f):
+    fs = os.listdir(f)
+    i=1
+    for f1 in fs:
+        tmp_path = os.path.join(f, f1)
+        if not os.path.isdir(tmp_path):
+            print(tmp_path)
+            img_augmentation(tmp_path, i)
+        i = i+8
+
+path = '..\\..\\train\data\\trainData\\test001\\'
+traverse(path)

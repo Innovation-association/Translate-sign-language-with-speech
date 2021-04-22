@@ -1,3 +1,12 @@
+#!/usr/bin/python3.6
+# -*- coding: utf-8 -*-
+# @Time       : 2021/4/22 10:05
+# @Author     : 代登辉
+# @Email      : 3276336032@qq.com
+# @File       : PalmTracker.py
+# @Software   : PyCharm
+# @Description: 数据收集 按S保存q推出  黑白
+
 import argparse
 import cv2
 import imutils
@@ -5,7 +14,7 @@ import imutils
 bg = None
 
 # 数据存储路径
-save_path = '../train/data/trainData/test001'
+save_path = '../../../train/data/trainData/test001'
 
 
 def run_avg(image, aWeight):
@@ -26,8 +35,8 @@ def segment(image, threshold=25):
                                 255,
                                 cv2.THRESH_BINARY)[1]
 
-    (cnts, _) = cv2.findContours(thresholded.copy(),
-                                 cv2.RETR_EXTERNAL,
+    (contours,cnts, _) = cv2.findContours(thresholded.copy(),
+                                 cv2.RETR_TREE,
                                  cv2.CHAIN_APPROX_SIMPLE)
 
     if len(cnts) == 0:
