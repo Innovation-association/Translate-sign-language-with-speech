@@ -1,7 +1,7 @@
+import argparse
 import cv2
 import imutils
-import numpy as np
-import argparse
+
 bg = None
 
 # 数据存储路径
